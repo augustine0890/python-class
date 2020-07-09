@@ -1,3 +1,6 @@
+def other_method(val):
+    print(f"other_method: {val}")
+
 class Date:
     total = 0
     
@@ -25,9 +28,22 @@ class Date:
         """
         d = Date.from_str('2020-11-20')
         """
-        print(cls)
+        print(f"from_str: {cls}")
         year, month, day = map(int, date_str.split('-'))
-        return cls(year, month, day)
+
+        other_method(43)
+
+        if cls.is_valid_date(year, month, day):
+            return cls(year, month, day)
+        else:
+            raise Exception("Invalid date")
+
+    @staticmethod
+    def is_valid_date(year, month, day):
+        if 0 <= year <= 3000 and 1 <= month <= 12 and 1 <= day <= 31:
+            return True
+        else:
+            return False
 
 
 d1 = Date(2020, 7, 12)
@@ -44,3 +60,8 @@ print(Date.total)
 print("-----" * 5)
 dd = Date.from_str('2020-12-25')
 print(dd)
+print(Date.is_valid_date(2020, 7, 20))
+print(Date.is_valid_date(2020, 7, 32))
+
+print("-----" * 5)
+test = Date.from_str('2020-14-23')
